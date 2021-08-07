@@ -1,0 +1,17 @@
+{
+	"name": "me-models-mysql",
+	"version": "1.0.0",
+	"main": "./lib/index.js",
+	"bin": {},
+	"scripts": {
+		"build": "tsc"
+	},
+	"dependencies": {
+		"think-helper": "^1.1.3",
+		"think-model-mysql": "^1.1.6"
+	},
+	"devDependencies": {
+		"@types/node": "^16.4.13",
+		"typescript": "^4.3.5"
+	}
+}
