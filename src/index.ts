@@ -109,7 +109,7 @@ Cls.prototype.isTableExists = async function (tableName: string) {
 Cls.prototype.handleFields = function (fields: any) {
 	fields = { ...fields };
 	if (fields.id === true) {
-		delete fields.id;
+		//delete fields.id;
 		fields.id = { type: 'INTEGER', nn: true, pk: true, ai: true };
 	}
 	if (fields.sp === true) {
