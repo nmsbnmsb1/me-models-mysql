@@ -199,7 +199,7 @@ Cls.prototype.checkIndex = async function (indexName: string, tableName: string,
 	const indexes = await this.query.query(`SHOW INDEX FROM \`${tableName}\` WHERE key_name='${indexName}';`);
 	if (helper.isEmpty(indexes) || indexes.length <= 0) {
 		let prefix = options && options.unique ? 'UNIQUE' : '';
-		let using = options && options.type ? `USING ${options.type}` : '';
+		let using = options && options.type ? `USING ${options.type.toUpperCase()}` : 'USING BTREE';
 		await this.query.query(`CREATE ${prefix} INDEX '${indexName}' ${using} ON \`${tableName}\` ('${columnNames.join("','")}');`);
 	}
 };
