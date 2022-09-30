@@ -190,10 +190,17 @@ Cls.prototype.checkTable = async function (
 	}
 	return op;
 };
-Cls.prototype.checkIndex = async function (indexName: string, tableName: string, columnName: string) {
+//CREATE UNIQUE INDEX user_realname_IDX USING BTREE ON tjxx.`user` (realname);
+//CREATE UNIQUE INDEX user_realname_IDX USING RTREE ON tjxx.`user` (id,uuid,current_role_uuid,wx_id);
+//CREATE UNIQUE INDEX user_realname_IDX USING HASH ON tjxx.`user` (current_role_uuid,wx_id,wx_unionid);
+
+//CREATE FULLTEXT INDEX user_phone_IDX ON tjxx.`user` (phone,m_phone);
+Cls.prototype.checkIndex = async function (indexName: string, tableName: string, columnNames: string[], options?: any) {
 	const indexes = await this.query.query(`SHOW INDEX FROM \`${tableName}\` WHERE key_name='${indexName}';`);
 	if (helper.isEmpty(indexes) || indexes.length <= 0) {
-		await this.query.query(`CREATE INDEX '${indexName}' ON \`${tableName}\` (\`${columnName}\`);`);
+		let prefix = options && options.unique ? 'UNIQUE' : '';
+		let using = options && options.type ? `USING ${options.type}` : '';
+		await this.query.query(`CREATE ${prefix} INDEX '${indexName}' ${using} ON \`${tableName}\` ('${columnNames.join("','")}');`);
 	}
 };
 

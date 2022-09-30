@@ -11,7 +11,7 @@
 		"think-model-mysql": "^1.1.7"
 	},
 	"devDependencies": {
-		"@types/node": "^18.7.18",
-		"typescript": "^4.8.3"
+		"@types/node": "^18.7.23",
+		"typescript": "^4.8.4"
 	}
 }
